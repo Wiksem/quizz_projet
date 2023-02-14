@@ -33,16 +33,28 @@ class _HomeScreenState extends State<HomeScreen> {
 
   int index = 0;
 
+  int score = 0;
+
   bool isPressed = false;
 
   void nextQuestion() {
     if (index == _questions.length - 1) {
       return;
     } else {
-      setState(() {
-        index++;
-        isPressed = false; 
-      });
+      if (isPressed) {
+        setState(() {
+          index++;
+          isPressed = false;
+        });
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('choissez une réponse'),
+            behavior: SnackBarBehavior.floating,
+            margin: EdgeInsets.symmetric(vertical: 20.0),
+          ),
+        );
+      }
     }
   }
 
@@ -57,10 +69,18 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: background,
       appBar: AppBar(
-        title: const Text('Quiz App'),
-        backgroundColor: background,
-        shadowColor: Colors.transparent,
-      ),
+          title: const Text('Quiz App'),
+          backgroundColor: background,
+          shadowColor: Colors.transparent,
+          actions: [
+            Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: Text(
+                'Score: $score',
+                style: const TextStyle(fontSize: 18.0),
+                ),
+            ),
+          ]),
       body: Container(
         width: double.infinity,
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
