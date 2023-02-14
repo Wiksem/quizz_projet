@@ -3,6 +3,7 @@ import '../constantes.dart';
 import '../question_model.dart';
 import '../widgets/question_widget.dart';
 import '../widgets/next_button.dart';
+import '../widgets/option_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -62,6 +63,9 @@ class _HomeScreenState extends State<HomeScreen> {
               totalQuestions: _questions.length,
             ),
             const Divider(color: neutral),
+            const SizedBox(height: 25.0),
+            for (int i = 0; i < _questions[index].options.length; i++)
+              OptionCard(option: _questions[index].options.keys.toList()[i])
           ],
         ),
       ),
