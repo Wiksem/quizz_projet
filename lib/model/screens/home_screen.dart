@@ -31,6 +31,17 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
 
   int index = 0;
+
+  void nextQuestion() {
+    if (index == _questions.length - 1) {
+      return;
+    } else {
+      setState(() {
+        index++;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,25 +52,26 @@ class _HomeScreenState extends State<HomeScreen> {
         shadowColor: Colors.transparent,
       ),
       body: Container(
-          width: double.infinity,
-          padding: const EdgeInsets.symmetric(horizontal: 10.0),
-          child: Column(
-            children: [
-              QuestionWidget(
-              question: _questions[index].title, 
-              indexAction: index, 
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+        child: Column(
+          children: [
+            QuestionWidget(
+              question: _questions[index].title,
+              indexAction: index,
               totalQuestions: _questions.length,
-              ),
-              const Divider(color: neutral),
-            ],
-          ),
+            ),
+            const Divider(color: neutral),
+          ],
         ),
-        
-    floatingActionButton: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-      child: NextButton(),
-    ), 
-       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      ),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+        child: NextButton(
+          nextQuestion: nextQuestion,
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import '../constantes.dart';
 
 class NextButton extends StatelessWidget {
-  const NextButton({super.key});
-
+  const NextButton({Key? key, required this.nextQuestion}) : super(key: key);
+  final VoidCallback nextQuestion; 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: nextQuestion,
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
